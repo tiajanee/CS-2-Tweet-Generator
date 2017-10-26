@@ -13,7 +13,7 @@ with open("/usr/share/dict/words", "r") as myfile:  #opens file
 
 def generate_word(number):
 
-	sentence = ""
+	phrase = ""
 	
 	for i in range(number): #repeats for input number of times
 		
@@ -22,17 +22,17 @@ def generate_word(number):
 		word = lines[line_number]  #gets words @ random index  		 #the length of the list
 
 		if i == number - 1: #if the number is less than the number inputed
-			sentence += (word + "!") #concatenate sentence with new word
+			phrase += (word + "!") #concatenate sentence with new word
 		else:
-			sentence += (word + " ") 
+			phrase += (word + " ") 
 
-	return sentence
+	return phrase
 	
 	
 
 if __name__ == '__main__':
 	input_args = sys.argv[1] 
-	sentence_length = int(input_args) #setting sentence length equal to input length
+	phrase_length = int(input_args) #setting sentence length equal to input length
 
-	sentence = generate_word(sentence_length)
-	print(sentence)
+	phrase = generate_word(phrase_length)
+	print(phrase)
