@@ -9,7 +9,7 @@ only as long as the number of words that the user inputs.
 
 '''
 
-with open("/usr/share/dict/words", "r") as myfile:  #opens file
+with open('/usr/share/dict/words', 'r') as myfile:  #opens file
 	word_list = myfile.read().splitlines()			#stores reading file into word_list
 
 def generate_word(number):
