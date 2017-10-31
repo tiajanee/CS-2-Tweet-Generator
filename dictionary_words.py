@@ -10,11 +10,9 @@ only as long as the number of words that the user inputs.
 '''
 
 with open("/usr/share/dict/words", "r") as myfile:  #opens file
-	word_list = myfile.read().splitlines()						#stores reading file into word_list
+	word_list = myfile.read().splitlines()			#stores reading file into word_list
 
 def generate_word(number):
-
-
 
 	phrase = ""
 	
@@ -23,7 +21,7 @@ def generate_word(number):
 		line_number = random.randrange(0, len(word_list)) #generates random number between 0 and 
 		word = word_list[line_number]  #gets words @ random index  		  #the length of the list
 
-		if i == number - 1: #if the number is less than the number inputed
+		if i == number - 1: # num of words printed equals int num inputed 
 			phrase += (word + "!") #concatenate sentence with new word
 		else:
 			phrase += (word + " ") 
