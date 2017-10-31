@@ -2,41 +2,37 @@
 import re
  
  
- # returns data that displays each unique word along with the number of times the word appears in the source text.
- def histogram(word_list):
-    exp = re.compile('\w+')
-    histogram = {}
+def histogram(word_list):
+    search = re.compile('\w+')
+    histogram = {}  
  
     for word in word_list:
-        if exp.match(word) is None:
+        if search.match(word) is None:
             continue
+
+        if word not in histogram:
+            histogram.update({word: 0})
  
-         if word not in histogram:
-             histogram.update({word: 0})
+            histogram[word] += 1
  
-         histogram[word] += 1
- 
-     return histogram
+    return histogram
  
  
- # takes a histogram argument and returns the total count of unique words in the histogram
- def unique_words(histogram):
+def unique_words(histogram):
      return len(histogram.keys())
  
  
- # takes a word and histogram argument and returns the number of times that word appears in a text
- def frequency(word, histogram):
-     if word not in histogram:
+def frequency(word, histogram):
+    if word not in histogram:
          return 0
+    
+    return histogram[word]
  
-     return histogram[word]
  
- 
- if __name__ == "__main__":
-   source_file = open('inception.txt')
-   source_word_list = [word.lower() for word in source_file.read().rsplit()]
-   source_histogram = histogram(source_word_list)
- 
-     print('Source histogram:\t', source_histogram, '\n\n')
-     print('Number of unique words:\t', unique_words(source_histogram), '\n\n')
-     print('Frequency of word "holmes":\t', frequency('holmes', source_histogram), '\n\n')
+if __name__ == "__main__":
+    text_file = open('practice_text.txt')
+    text_word_list = [word.lower() for word in text_file.read().rsplit()]
+    text_histogram = histogram(text_word_list)
+    print('Histogram:\t', text_histogram, '\n\n')
+    print('Num of Unique_Words:\t', unique_words(text_histogram), '\n')
+    print('"but" occurs:\t', frequency('but', text_histogram), 'times \n')
