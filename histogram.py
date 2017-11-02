@@ -29,28 +29,23 @@ def frequency(word, histogram):
     
     return histogram[word]
 
-def random_word():
+def random_word(hist):       
 
-    #rand_index = random.randrange(0, len(text_word_list))  
-    #rand_word = text_word_list[rand_index]       
-
-    rand_word =  random.choice(text_word_list)
+    rand_word =  random.choice(list(hist.keys()))
     return rand_word
  
  
 if __name__ == "__main__":
-    text_file = open('practice_text.txt')
+    text_file = open('fish.txt')
     text_word_list = [word.lower() for word in text_file.read().rsplit()]
+    #print(text_word_list)
     text_histogram = histogram(text_word_list)
-
-    #rand_hist_word = random.choice(text_word_list)
-
-    rand_word = random_word()
+    #print(text_histogram)
 
     print('Histogram:\t', text_histogram, '\n\n')
     print('Num of Unique_Words:\t', unique_words(text_histogram), '\n')
     print('"and" occurs:\t', frequency('and', text_histogram), 'times \n')
-    print('"also" occurs:\t', frequency('also', text_histogram), 'times \n')
+    print('"red" occurs:\t', frequency('red', text_histogram), 'times \n')
     print('"he" occurs:\t', frequency('he', text_histogram), 'times \n')
-    print("A random word from this histogram is", rand_word)
-    print("Another random word from this histogram is", rand_word)
+    print("A random word from this histogram is", random_word(text_histogram))
+    print("Another random word from this histogram is", random_word(text_histogram))
