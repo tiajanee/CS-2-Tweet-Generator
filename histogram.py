@@ -29,18 +29,25 @@ def frequency(word, histogram):
     
     return histogram[word]
 
-def random_word(hist):       
+def random_word(histogram):       
 
-    rand_word =  random.choice(list(hist.keys()))
+    rand_word =  random.choice(list(histogram.keys()))
     return rand_word
- 
+
+# def weighted_freq(histogram, word_list):
+    
+#     word_weight = histogram.keys() / (sum(word_list))
+#     rand_int = random.randrange(0,1)
+#     for word in histogram:
+#         if word_weight < rand_int:
+#             continue
+#         if word_weight > rand_int:
+#             print(word)
  
 if __name__ == "__main__":
-    text_file = open('fish.txt')
+    text_file = open('practice_text.txt')
     text_word_list = [word.lower() for word in text_file.read().rsplit()]
-    #print(text_word_list)
     text_histogram = histogram(text_word_list)
-    #print(text_histogram)
 
     print('Histogram:\t', text_histogram, '\n\n')
     print('Num of Unique_Words:\t', unique_words(text_histogram), '\n')
@@ -49,3 +56,4 @@ if __name__ == "__main__":
     print('"he" occurs:\t', frequency('he', text_histogram), 'times \n')
     print("A random word from this histogram is", random_word(text_histogram))
     print("Another random word from this histogram is", random_word(text_histogram))
+    #print("This is a weighted random word", weighted_freq(text_histogram, text_word_list))
