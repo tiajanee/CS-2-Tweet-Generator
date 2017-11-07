@@ -1,1 +1,1 @@
-web: run histogram.py $PORT
+web: flask run 
