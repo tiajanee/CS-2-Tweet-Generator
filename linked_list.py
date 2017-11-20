@@ -52,9 +52,6 @@ class LinkedList(object):
     def length(self):
         """Return the length of this linked list by traversing its nodes.
         TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Loop through all nodes and count one for each
-        
-        #optimized working code
         
         #start iterating at the beginning of LL
         current_node = self.head
@@ -73,7 +70,6 @@ class LinkedList(object):
         """Insert the given item at the tail of this linked list.
         TODO: Running time: O(???) Why and under what conditions?"""
 
-        #optimized code
         #create a new node
         new_node = Node(item)
         #if LL is empty
@@ -88,30 +84,40 @@ class LinkedList(object):
         self.tail = new_node
 
     def prepend(self, item):
+         """Insert the given item at the head of this linked list.
+        TODO: Running time: O(???) Why and under what conditions?"""
+        
+        #initiaize new node with the inputed data
         new_node = Node(item)
 
+        #if LL is empty, set the tail and head pointer to the new node 
         if self.is_empty():
             self.tail  = new_node
+            self.head = self.tail
+
+        #if LL is not empty, the new node next pointer to the current head
         else:
             new_node.next = self.head
+        #point the head pointer at the new node
         self.head = new_node
-
-
-        """Insert the given item at the head of this linked list.
-        TODO: Running time: O(???) Why and under what conditions?"""
-        # TODO: Create new node to hold given item
-        # TODO: Prepend node before head, if it exists
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
         TODO: Best case running time: O(???) Why and under what conditions?
         TODO: Worst case running time: O(???) Why and under what conditions?"""
+
+        #start traversing at the head
         current_node = self.head
         item = None
+
         while current_node is not None:
+            #if the item in the list matches the item that we're looking for
+            #get nodes data and store it in the item variable
             if quality(current_node.data):
                 item = current_node.data
                 return item
+            #keep traversing through the list until we find the 
+            #node with correct data 
             else:
                 current_node = current_node.next
 
@@ -120,25 +126,42 @@ class LinkedList(object):
         TODO: Best case running time: O(???) Why and under what conditions?
         TODO: Worst case running time: O(???) Why and under what conditions?"""
 
+        #if there no item in the list to delete
         if self.is_empty():
             raise ValueError('Item not found: {}'.format(item))
 
+        #using lamba and find method to match inputed item to item in list   
         search_item = self.find(lambda item_: item_ == item) 
+
+        #if the item inputed does not exist in the list, raise ValueError
         if search_item is None:
             raise ValueError('Item not found: {}'.format(item))
+        
         previous_node = None
         current_node = self.head
+        #while we are not at the end of the lsit
         while current_node is not None:
             if current_node.data != item:
+                #if we havent found the item, move to the next item
+                #save last node in previous_node variable to keep track of node before current
                 previous_node = current_node
                 current_node = current_node.next
                 #traversing through LL
+
+            #if we have found the item
             elif current_node.data == item:
+                #if the node we want to delete is the head
                 if current_node == self.head:
-                    self.head = current_node.next    
+                    #set the next node in list as the head, losing pointer deletes node
+                    self.head = current_node.next
+                    #if the node we want to delete is the tail    
                     if current_node == self.tail:
+                        #set the previous node equal to the tail, losing pointer deletes the node
                         self.tail = previous_node
                     break
+                #if we found the item and it is not the head nor the tail, point the
+                #previous nodes pointer to the one after the current node
+                #losing pointer deletes the node
                 previous_node.next = current_node.next
                 if current_node == self.tail:
                     self.tail = previous_node
